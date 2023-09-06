@@ -1,43 +1,44 @@
-variable "remote_backend_name" {}
+variable "bucket_name" {
+  type        = string
+  description = "S3 Bucket Name"
+}
+variable "dynamodb_table_name" {
+  type        = string
+  description = "Dynamo DB Table Name"
+}
 
-variable "environment_name" {}
-
-variable "owner" {}
-
-variable "description" {}
 variable "s3_kms_master_key_id" {
   description = "KMS id used for encrypting the S3 bucket"
   type        = string
 }
 
 variable "acl" {
-  default = "private"
-}
-
-variable "enable_versioning" {
-  default = true
+  description = "ACL Type"
+  default     = "private"
 }
 
 variable "sse_algorithm" {
-  default = "AES256"
+  description = "Type of sse algorithm for encryption"
+  default     = "AES256"
 }
 
 variable "dynamodb_billing_mode" {
-  default = "PAY_PER_REQUEST"
+  description = "Type of Dynamo DB table billing mode"
+  default     = "PAY_PER_REQUEST"
 }
 
 variable "dynamodb_hash_key" {
-  default = "LockID"
-}
-
-variable "additional_tags" {
-  default     = {}
-  description = "Additional resource tags"
-  type        = map(string)
+  description = "Type of Dynamo DB Has Key type"
+  default     = "LockID"
 }
 
 variable "s3_bucket_key_enabled" {
   default     = true
-  description = "Enable S3 bucket for KMS key"
+  description = "Enable sse for S3 bucket with KMS key"
   type        = bool
+}
+
+variable "tags" {
+  type = object({
+  })
 }
