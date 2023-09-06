@@ -1,0 +1,17 @@
+# TLDR; Generate Docs for each tf module with command from repo the root: ./generate-terraform-docs.sh 
+#
+# Limitation on recursive path, only one folder deep, no support for nested custom 
+# hierachy folder tree.
+
+formatter: markdown table
+
+recursive:
+  enabled: false
+  path: ""
+
+output:
+  file: README.md
+  mode: inject
+
+settings:
+  hide-empty: true
