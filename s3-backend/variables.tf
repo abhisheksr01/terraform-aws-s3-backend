@@ -20,7 +20,7 @@ variable "s3_bucket_public_access_block" {
     ignore_public_acls      = true
     restrict_public_buckets = true
   }
-  description = "Object of aws s3 bucket public access block values. Default set to true from security perspective."
+  description = "S3 bucket public access block values. Default set to true from security perspective."
 }
 
 variable "s3_bucket_object_ownership_controls" {
