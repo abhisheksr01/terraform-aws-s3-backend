@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "s3_backend_bucket" {
-  bucket   = var.bucket_name
-  tags_all = var.tags
+  bucket = var.bucket_name
+  tags   = var.tags
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_backend_public_access_block" {

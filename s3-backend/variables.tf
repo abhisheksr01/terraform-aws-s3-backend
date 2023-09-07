@@ -67,6 +67,5 @@ variable "dyanmodb_point_in_time_recovery" {
 
 variable "tags" {
   description = "These tags will be applied to all the resources within the module"
-  type = object({
-  })
+  type        = map(string)
 }
