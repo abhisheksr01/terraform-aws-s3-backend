@@ -42,3 +42,10 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "s3_backend_sse_co
     bucket_key_enabled = var.s3_bucket_key_enabled
   }
 }
+
+resource "aws_s3_bucket_logging" "s3_backend_bucket_logging" {
+  count         = var.s3_bucket_logging.enable ? 1 : 0
+  bucket        = aws_s3_bucket.s3_backend_bucket.id
+  target_bucket = var.s3_bucket_logging.target_bucket_name
+  target_prefix = var.s3_bucket_logging.target_prefix
+}
