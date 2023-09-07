@@ -14,10 +14,10 @@ An example of how to use this module in your terraform file.
 
 ```
 module "s3_backend" {
-  source               = "git::https://github.com/abhisheksr01/terraform-modules.git//aws/s3-backend"
-  bucket_name          = var.bucket_name
-  dynamodb_table_name  = var.dynamodb_table_name
-  tags                 = var.default_tags
+  source                      = "git::https://github.com/abhisheksr01/aws-terraform-modules.git//s3-backend"
+  bucket_name                 = var.bucket_name
+  dynamodb_table_name         = var.dynamodb_table_name
+  tags                        = var.default_tags
   s3_bucket_kms_master_key_id = data.aws_kms_alias.aws_kms_s3_default_key.id
 }
 
