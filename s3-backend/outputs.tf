@@ -1,7 +1,9 @@
 output "s3_backend_bucket_id" {
-  value = aws_s3_bucket.s3_backend.id
+  description = "S3 Bucket Id for backend"
+  value       = aws_s3_bucket.s3_backend_bucket.id
 }
 
 output "state_lock_dynamodb_table_id" {
-  value = aws_dynamodb_table.tf_state_locks.id
+  description = "Dynamo DB Table Id for backend state lock management"
+  value       = aws_dynamodb_table.tf_state_locks.id
 }
