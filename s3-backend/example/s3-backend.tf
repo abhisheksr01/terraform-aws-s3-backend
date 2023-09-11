@@ -1,5 +1,5 @@
 module "s3_backend" {
-  source                      = "git::https://github.com/abhisheksr01/aws-terraform-modules.git//s3-backend"
+  source                      = "git::https://github.com/abhisheksr01/aws-terraform-modules.git//s3-backend?ref=v0.2.0"
   bucket_name                 = lower("${var.bucket_name}-${random_string.suffix.result}")
   dynamodb_table_name         = lower("${var.dynamodb_table_name}-${random_string.suffix.result}")
   tags                        = var.default_tags

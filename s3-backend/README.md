@@ -14,7 +14,7 @@ An example of how to use this module in your terraform file.
 
 ```
 module "s3_backend" {
-  source                      = "git::https://github.com/abhisheksr01/aws-terraform-modules.git//s3-backend"
+  source                      = "git::https://github.com/abhisheksr01/aws-terraform-modules.git//s3-backend?ref=v0.2.0"
   bucket_name                 = var.bucket_name
   dynamodb_table_name         = var.dynamodb_table_name
   tags                        = var.default_tags
