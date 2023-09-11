@@ -57,7 +57,7 @@ func TestTerraformAwsS3BackendBucket(t *testing.T) {
 	// This will run `terraform init` and `terraform apply` and fail the test if there are any errors
 	terraform.InitAndApply(t, terraformOptions)
 
-	/* ASSERTIONS */
+	/* ASSERTING S3 BUCKET */
 	// Run `terraform output` to get the value of an output variable
 	bucketID := terraform.Output(t, terraformOptions, "s3_backend_bucket_id")
 	// Assert bucket have versioning enabled
@@ -67,7 +67,7 @@ func TestTerraformAwsS3BackendBucket(t *testing.T) {
 	session, err := session.NewSession(&aws.Config{
 		Region: &expectedAwsRegion},
 	)
-	// Create S3 service client
+	// Create S3 service clienthttps://ca.slack-edge.com/T03BGDG7A-UMYTD01SM-56cb4c04c1b6-512
 	svc := s3.New(session)
 	//Assert bucket have ACL
 	actualBucketACL, err := svc.GetBucketAcl(&s3.GetBucketAclInput{Bucket: aws.String(bucketID)})
@@ -92,6 +92,18 @@ func TestTerraformAwsS3BackendBucket(t *testing.T) {
 	//Assert bucket have all the expected tags
 	actualTag, err := svc.GetBucketTagging(&s3.GetBucketTaggingInput{Bucket: aws.String(bucketID)})
 	for _, b := range actualTag.TagSet {
+		assert.EqualValues(t, expectedTags[*b.Key], *b.Value)
+	}
+
+	/* ASSERTING DYNAMODB TABLE */
+	dynamoDBID := terraform.Output(t, terraformOptions, "state_lock_dynamodb_table_id")
+	// Assert bucket have versioning enabled
+	dynamoDBObj := awsTerratest.GetDynamoDBTable(t, expectedAwsRegion, dynamoDBID)
+	assert.Equal(t, "PAY_PER_REQUEST", *dynamoDBObj.BillingModeSummary.BillingMode)
+	assert.Equal(t, "ENABLED", *dynamoDBObj.SSEDescription.Status)
+	assert.Equal(t, "KMS", *dynamoDBObj.SSEDescription.SSEType)
+	ddTags := awsTerratest.GetDynamoDbTableTags(t, expectedAwsRegion, dynamoDBID)
+	for _, b := range ddTags {
 		assert.EqualValues(t, expectedTags[*b.Key], *b.Value)
 	}
 }
