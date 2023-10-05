@@ -2,12 +2,6 @@
 
 Terraform module for creating a S3 backend with Dynamodb table for state locking.
 
-## Providers
-
-| Name                                              | Version  |
-| ------------------------------------------------- | -------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >=5.15.0 |
-
 ## Usage
 
 An example of how to use this module in your terraform file.
@@ -27,6 +21,14 @@ data "aws_kms_alias" "aws_kms_s3_default_key" {
 ```
 
 [Click here to see the detailed example implementation](./example/)
+<!-- BEGIN_TF_DOCS -->
+
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 
 ## Resources
 
@@ -53,7 +55,7 @@ data "aws_kms_alias" "aws_kms_s3_default_key" {
 | <a name="input_s3_bucket_acl"></a> [s3\_bucket\_acl](#input\_s3\_bucket\_acl) | S3 Buckert ACL Type | `string` | `"private"` | no |
 | <a name="input_s3_bucket_key_enabled"></a> [s3\_bucket\_key\_enabled](#input\_s3\_bucket\_key\_enabled) | Enables sse for S3 bucket with KMS key | `bool` | `true` | no |
 | <a name="input_s3_bucket_kms_master_key_id"></a> [s3\_bucket\_kms\_master\_key\_id](#input\_s3\_bucket\_kms\_master\_key\_id) | KMS master key id used for encrypting the S3 bucket | `string` | n/a | yes |
-| <a name="input_s3_bucket_logging"></a> [s3\_bucket\_logging](#input\_s3\_bucket\_logging) | Map of S3 Bucket logging block,when set to enable = true taget\_bucket\_name must be provided | `map(any)` | <pre>{<br>  "enable": false,<br>  "target_bucket_name": "target_bucket_name",<br>  "target_prefix": "/logs"<br>}</pre> | no |
+| <a name="input_s3_bucket_logging"></a> [s3\_bucket\_logging](#input\_s3\_bucket\_logging) | Map of S3 Bucket logging block,when set to enable = true target\_bucket\_name must be provided | `map(any)` | <pre>{<br>  "enable": false,<br>  "target_bucket_name": "target_bucket_name",<br>  "target_prefix": "/logs"<br>}</pre> | no |
 | <a name="input_s3_bucket_object_ownership_controls"></a> [s3\_bucket\_object\_ownership\_controls](#input\_s3\_bucket\_object\_ownership\_controls) | S3 bucket object ownership controls | `string` | `"BucketOwnerPreferred"` | no |
 | <a name="input_s3_bucket_public_access_block"></a> [s3\_bucket\_public\_access\_block](#input\_s3\_bucket\_public\_access\_block) | S3 bucket public access block of Object type. Default set to true from security perspective. | <pre>object({<br>    block_public_acls       = bool<br>    block_public_policy     = bool<br>    ignore_public_acls      = bool<br>    restrict_public_buckets = bool<br>  })</pre> | <pre>{<br>  "block_public_acls": true,<br>  "block_public_policy": true,<br>  "ignore_public_acls": true,<br>  "restrict_public_buckets": true<br>}</pre> | no |
 | <a name="input_s3_bucket_sse_algorithm"></a> [s3\_bucket\_sse\_algorithm](#input\_s3\_bucket\_sse\_algorithm) | S3 Bucket's type of sse algorithm for encryption | `string` | `"AES256"` | no |
