@@ -1,0 +1,62 @@
+name: Run Tests
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
+
+on:
+  workflow_call:
+    secrets:
+      aws-account-id:
+        required: true
+
+concurrency: terratest-public-website-bucket
+
+jobs:
+  run-integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to AWS
+        uses: armakuni/github-actions/assume-aws-oidc-role@v0.14.10
+        with:
+          aws-account-id: ${{ secrets.aws-account-id }}
+          aws-region: eu-west-3
+
+      - uses: actions/setup-go@v4
+        with:
+          go-version: 1.21.0
+
+      - name: Download Go modules
+        run: go mod download
+        working-directory: test
+
+      - name: Run Integration Terratest (via Go)
+        run: go test -timeout 5m
+        working-directory: test/integration
+
+  run-unit-tests:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Log in to AWS
+          uses: armakuni/github-actions/assume-aws-oidc-role@v0.14.10
+          with:
+            aws-account-id: ${{ secrets.aws-account-id }}
+            aws-region: eu-west-3
+
+        - uses: actions/setup-go@v4
+          with:
+            go-version: 1.21.0
+
+        - name: Download Go modules
+          run: go mod download
+          working-directory: test
+
+        - name: Run Unit Terratest (via Go)
+          run: go test -timeout 5m
+          working-directory: test/unit
