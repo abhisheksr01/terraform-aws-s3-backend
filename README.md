@@ -1,6 +1,8 @@
 # AWS S3-Backend Terraform module
 
-Terraform module for creating a S3 backend with Dynamodb table for state locking.
+Terraform module for creating a S3 backend with a S3 bucket and Dynamodb table for state lock management.
+
+The resources in the module follows the best practices and scanned by vulnerability analysis tools.
 
 ## Usage
 
@@ -8,7 +10,8 @@ An example of how to use this module in your terraform file.
 
 ```
 module "s3_backend" {
-  source                      = "git::https://github.com/abhisheksr01/aws-terraform-modules.git//s3-backend?ref=v0.2.0"
+  source                      = "abhisheksr01/s3-backend/aws"
+  version                     = "0.1.0"
   bucket_name                 = var.bucket_name
   dynamodb_table_name         = var.dynamodb_table_name
   tags                        = var.default_tags
@@ -20,7 +23,7 @@ data "aws_kms_alias" "aws_kms_s3_default_key" {
 }
 ```
 
-[Click here to see the detailed example implementation](./example/)
+[Click here to see the detailed example implementation](./example/basic/README.md)
 <!-- BEGIN_TF_DOCS -->
 
 

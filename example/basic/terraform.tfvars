@@ -6,6 +6,6 @@ default_tags = {
   Team        = "Learn"
   Environment = "Dev"
   Description = "Resources for s3 backend"
-  Repository  = "https://github.com/abhisheksr01/terraform-modules"
+  Repository  = "https://github.com/abhisheksr01/terraform-aws-s3-backend"
   Provisioner = "Terraform"
 }

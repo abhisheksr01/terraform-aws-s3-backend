@@ -1,3 +1,5 @@
+name: publish-module-terraform-aws-s3-backend
+
 on:
   push:
     branches: ["*"]
