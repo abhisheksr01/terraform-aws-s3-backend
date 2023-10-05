@@ -23,7 +23,7 @@ data "aws_kms_alias" "aws_kms_s3_default_key" {
 }
 ```
 
-[Click here to see the detailed example implementation](./example/basic/README.md)
+[Click here to see simplest implementation example and relevant details](https://github.com/abhisheksr01/terraform-aws-s3-backend/tree/main/example/basic)
 <!-- BEGIN_TF_DOCS -->
 
 
