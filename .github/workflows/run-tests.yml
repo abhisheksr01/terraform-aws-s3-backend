@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Log in to AWS
-        uses: armakuni/github-actions/assume-aws-oidc-role@v0.14.10
+        uses: armakuni/github-actions/assume-aws-oidc-role@v0.14.11
         with:
           aws-account-id: ${{ secrets.aws-account-id }}
           aws-region: eu-west-3
@@ -44,7 +44,7 @@ jobs:
           uses: actions/checkout@v4
 
         - name: Log in to AWS
-          uses: armakuni/github-actions/assume-aws-oidc-role@v0.14.10
+          uses: armakuni/github-actions/assume-aws-oidc-role@v0.14.11
           with:
             aws-account-id: ${{ secrets.aws-account-id }}
             aws-region: eu-west-3
